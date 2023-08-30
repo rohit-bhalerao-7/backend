@@ -4,6 +4,8 @@ const {Token} = require('./token.model.js');
 const {UserWallet} = require('./wallet.model.js');
 const {Order} = require('./order.model.js');
 const {Trade} = require('./trade.model.js');
+const {TradingPair} = require('./tradingpair.model.js');
+const {Market} = require('./market.model.js');
 
 User.hasMany(UserWallet, { foreignKey: 'user_id' });
 UserWallet.belongsTo(User, { foreignKey: 'user_id' });
@@ -20,10 +22,16 @@ Order.belongsTo(Token, { foreignKey: 'token_id' });
 Order.belongsToMany(Order, { through: Trade, as: 'BuyOrders', foreignKey: 'buy_order_id' });
 Order.belongsToMany(Order, { through: Trade, as: 'SellOrders', foreignKey: 'sell_order_id' });
 
+
+TradingPair.belongsTo(Market, { foreignKey: 'marketType', targetKey: 'type' });
+Market.hasMany(TradingPair, { foreignKey: 'marketType', sourceKey: 'type' });
+
 module.exports = {
     User,
     Token,
     UserWallet,
     Order,
-    Trade
+    Trade,
+    TradingPair,
+    Market
 };

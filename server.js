@@ -10,6 +10,7 @@ const tradeRoutes = require('./routes/trade.route');
 const tokenRoutes = require('./routes/token.route');
 const walletRoutes = require('./routes/wallet.route');
 const swaggerSpec = require('./swagger');
+const tradingPairRoutes = require('./routes/tradingpair.route');
 
 
 const app = express();
@@ -38,6 +39,7 @@ app.use('/tokens',tokenRoutes);
 app.use('/wallets',walletRoutes);
 
 app.use('/orders',orderRoutes);
+app.use('/api/trading-pairs', tradingPairRoutes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
