@@ -1,0 +1,10 @@
+{
+    "development": {
+      "username": "postgres",
+      "password": "9533546445",
+      "database": "timechain-labs",
+      "host": "localhost",
+      "dialect": "postgres"
+    }
+  }
+  
