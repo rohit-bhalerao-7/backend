@@ -17,7 +17,7 @@ const UsersController = require("../controllers/user.controller");
  *     properties:
  *       user_id:
  *         type: string
- *       ... [other properties of the User model]
+ *       
  *
  * /users:
  *   get:

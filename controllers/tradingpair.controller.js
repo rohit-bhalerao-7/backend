@@ -1,5 +1,5 @@
 // controllers/tradingPairController.js
-const TradingPair = require('../models/tradingPair.model');
+const TradingPair = require('../models/tradingpair.model.js');
 
 exports.getAllTradingPairs = async (req, res) => {
     try {

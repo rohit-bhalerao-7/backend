@@ -17,7 +17,7 @@ const UserWalletsController = require('../controllers/wallet.controller');
  *     properties:
  *       wallet_id:
  *         type: string
- *       ... [other properties of the UserWallet model]
+ *       
  *
  * /wallets:
  *   get:
