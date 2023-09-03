@@ -5,54 +5,44 @@ const TokensController = require('../controllers/token.controller');
  * @swagger
  * /tokens:
  *   get:
- *     summary: Retrieve a list of tokens
+ *     tags:
+ *       - Tokens
+ *     summary: Retrieve all available tokens
+ *     description: Fetches all tokens present in the system.
  *     responses:
  *       200:
- *         description: A list of tokens.
+ *         description: List of all tokens.
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Token'
- * 
- * components:
- *   schemas:
- *     Token:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *         name:
- *           type: string
- *         symbol:
- *           type: string
- *         createdAt:
- *           type: string
- *         updatedAt:
- *           type: string
+ *       500:
+ *         description: Error retrieving tokens.
  */
 
 /**
  * @swagger
- * /token/{id}:
+ * /tokens/{id}:
  *   get:
  *     tags:
  *       - Tokens
- *     description: Retrieves a specific token by ID.
- *     produces:
- *       - application/json
+ *     summary: Retrieve details of a specific token using its ID
  *     parameters:
  *       - name: id
- *         description: Token's ID.
+ *         description: Token's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: A token object.
- *         schema:
- *           $ref: '#/definitions/Token'
+ *         description: Details of the specified token.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Token'
  *       404:
  *         description: Token not found.
  *       500:
@@ -61,80 +51,85 @@ const TokensController = require('../controllers/token.controller');
 
 /**
  * @swagger
- * /token:
+ * /tokens:
  *   post:
  *     tags:
  *       - Tokens
- *     description: Creates a new token.
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: token
- *         description: Token object.
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Token'
+ *     summary: Register a new token in the system
+ *     description: Adds a new token to the list of available tokens.
+ *     requestBody:
+ *       description: Token object that needs to be added.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Token'
  *     responses:
  *       201:
- *         description: Successfully created token.
+ *         description: Token successfully registered.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Token'
  *       500:
- *         description: Error creating token.
+ *         description: Error registering the token.
  */
 
 /**
  * @swagger
- * /token/{id}:
+ * /tokens/{id}:
  *   put:
  *     tags:
  *       - Tokens
- *     description: Updates a specific token by ID.
- *     produces:
- *       - application/json
+ *     summary: Update details of a specific token using its ID
  *     parameters:
  *       - name: id
- *         description: Token's ID.
+ *         description: Token's unique identifier.
  *         in: path
  *         required: true
- *         type: string
- *       - name: token
- *         description: Token object with updated values.
- *         in: body
- *         required: true
  *         schema:
- *           $ref: '#/definitions/Token'
+ *           type: integer
+ *     requestBody:
+ *       description: Updated token object.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Token'
  *     responses:
  *       200:
- *         description: Successfully updated token.
+ *         description: Token successfully updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Token'
  *       404:
  *         description: Token not found.
  *       500:
- *         description: Error updating token.
+ *         description: Error updating the token.
  */
-
 
 /**
  * @swagger
- * /token/{id}:
+ * /tokens/{id}:
  *   delete:
  *     tags:
  *       - Tokens
- *     description: Deletes a specific token by ID.
- *     produces:
- *       - application/json
+ *     summary: Remove a specific token using its ID
  *     parameters:
  *       - name: id
- *         description: Token's ID.
+ *         description: Token's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
- *         description: Successfully deleted token.
+ *         description: Token successfully deleted.
  *       404:
  *         description: Token not found.
  *       500:
- *         description: Error deleting token.
+ *         description: Error deleting the token.
  */
 
 

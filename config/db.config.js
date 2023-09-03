@@ -3,7 +3,7 @@ const config = require('../config/config.json').development;  // Adjust as per y
 
 const sequelize = new Sequelize({
     dialect: 'postgres', // The dialect for PostgreSQL
-    host: 'localhost', // Your PostgreSQL database host
+    host: '172.31.64.1', // Your PostgreSQL database host
     port: 5432, // Default PostgreSQL port
     username: 'postgres', // Your database username
     password: 'Rohitps123', // Your database password

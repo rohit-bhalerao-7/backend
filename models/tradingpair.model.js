@@ -9,20 +9,8 @@ const TradingPair = sequelize.define('TradingPair', {
         allowNull: false,
         unique: true
     },
-    // marketType: {
-    //     type: DataTypes.STRING,
-    //     references: {
-    //         model: Market,
-    //         key: 'type'
-    //     }
-    // },
-    marketType: {
-        type: DataTypes.STRING,
-        references: {
-            model: 'Market',  // Referencing by table name instead of the model
-            key: 'type'
-        }
-    },
+    
+    
     
     lastMarketPrice: DataTypes.FLOAT,
     change24h: DataTypes.FLOAT,

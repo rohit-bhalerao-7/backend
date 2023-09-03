@@ -5,132 +5,161 @@ const UsersController = require("../controllers/user.controller");
 
 /**
  * @swagger
- * tags:
- *   name: Users
- *   description: User management
- * 
- * definitions:
- *   User:
- *     type: object
- *     required:
- *       - user_id
- *     properties:
- *       user_id:
- *         type: string
- *       
- *
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - username
+ *         - email
+ *         - encrypted_password
+ *       properties:
+ *         user_id:
+ *           type: integer
+ *           description: The unique ID of the user.
+ *         username:
+ *           type: string
+ *           description: The username of the user.
+ *         email:
+ *           type: string
+ *           description: The email address of the user.
+ *         encrypted_password:
+ *           type: string
+ *           description: The encrypted password of the user.
+ *         2fa_enabled:
+ *           type: boolean
+ *           description: Two-factor authentication status of the user.
+ *         created_at:
+ *           type: string
+ *           format: date-time
+ *           description: The creation date and time of the user.
+ *         last_login:
+ *           type: string
+ *           format: date-time
+ *           description: The last login date and time of the user.
+ */
+
+/**
+ * @swagger
  * /users:
  *   get:
- *     tags: [Users]
+ *     tags:
+ *       - Users
  *     summary: Retrieve all users
  *     description: Fetches all users from the database.
  *     responses:
  *       200:
- *         description: List of users
- *         schema:
- *           type: array
- *           items:
- *             $ref: '#/definitions/User'
+ *         description: List of all users.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/User'
  *       500:
- *         description: Server error
+ *         description: Error retrieving users.
  */
 
 /**
+ * @swagger
  * /users/{id}:
  *   get:
- *     tags: [Users]
- *     summary: Retrieve a user by ID
- *     description: Fetch a specific user based on the provided ID.
+ *     tags:
+ *       - Users
+ *     summary: Retrieve details of a specific user by ID.
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         description: User's unique ID.
+ *         in: path
  *         required: true
- *         description: ID of the user to fetch.
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: User details
- *         schema:
- *           $ref: '#/definitions/User'
+ *         description: Details of the specified user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
  *       404:
- *         description: User not found
+ *         description: User not found.
  *       500:
- *         description: Server error
+ *         description: Error retrieving user details.
  */
 
-
 /**
- * /users:
+ * @swagger
+ * /users/register:
  *   post:
- *     tags: [Users]
- *     summary: Create a new user
- *     description: Adds a new user to the database.
- *     parameters:
- *       - in: body
- *         name: body
- *         required: true
- *         description: User object to add.
- *         schema:
- *           $ref: '#/definitions/User'
+ *     tags:
+ *       - Users
+ *     summary: Create a new user.
+ *     description: Registers a new user in the system.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       201:
- *         description: User created
- *         schema:
- *           $ref: '#/definitions/User'
+ *         description: User successfully created.
  *       500:
- *         description: Server error
+ *         description: Error creating user.
  */
 
 /**
+ * @swagger
  * /users/{id}:
  *   put:
- *     tags: [Users]
- *     summary: Update a user by ID
- *     description: Modify details of a specific user based on the provided ID.
+ *     tags:
+ *       - Users
+ *     summary: Update details of a specific user by ID.
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         description: User's unique ID.
+ *         in: path
  *         required: true
- *         description: ID of the user to modify.
- *         type: string
- *       - in: body
- *         name: body
- *         required: true
- *         description: Updated user object.
  *         schema:
- *           $ref: '#/definitions/User'
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
  *     responses:
  *       200:
- *         description: User updated
- *         schema:
- *           $ref: '#/definitions/User'
+ *         description: User successfully updated.
  *       404:
- *         description: User not found
+ *         description: User not found.
  *       500:
- *         description: Server error
+ *         description: Error updating user.
  */
-
 
 /**
+ * @swagger
  * /users/{id}:
  *   delete:
- *     tags: [Users]
- *     summary: Delete a user by ID
- *     description: Removes a specific user from the database based on the provided ID.
+ *     tags:
+ *       - Users
+ *     summary: Delete a specific user by ID.
  *     parameters:
- *       - in: path
- *         name: id
+ *       - name: id
+ *         description: User's unique ID.
+ *         in: path
  *         required: true
- *         description: ID of the user to delete.
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
- *         description: User deleted successfully
+ *         description: User successfully deleted.
  *       404:
- *         description: User not found
+ *         description: User not found.
  *       500:
- *         description: Server error
+ *         description: Error deleting user.
  */
+
 
 
 // Fetch all users
