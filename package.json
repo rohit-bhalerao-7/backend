@@ -1,8 +1,8 @@
 {
-    "name": "ManthendexCryptoExchange",
+    "name": "manthandex",
     "version": "0.1.0",
     "scripts": {
-        "start": "nodemon server.js"
+        "start": "node server.js"
     },
     "dependencies": {
         "body-parser": "^1.20.2",
@@ -11,6 +11,7 @@
         "nodemon": "3.0.1",
         "pg": "8.11.2",
         "pg-hstore": "2.3.4",
+        "redis": "^4.6.8",
         "sequelize": "6.32.1",
         "sequelize-cli": "6.6.1",
         "socket.io": "4.7.2",

@@ -6,93 +6,121 @@ const OrdersController = require('../controllers/order.controller');
  * @swagger
  * /orders:
  *   get:
- *     summary: Retrieve a list of orders
+ *     tags:
+ *       - Orders
+ *     summary: Retrieve all orders from the order book
+ *     description: Fetches all buy and sell orders from the order book.
  *     responses:
  *       200:
- *         description: A list of users.
+ *         description: List of buy and sell orders.
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   order_id:
- *                     type: integer
- *                   order_type:
- *                     type: string
+ *               type: object
+ *               properties:
+ *                 sellOrders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       orderId:
+ *                         type: integer
+ *                       price:
+ *                         type: number
+ *                 buyOrders:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       orderId:
+ *                         type: integer
+ *                       price:
+ *                         type: number
+ *       500:
+ *         description: Error retrieving order book from Redis.
  */
+
 /**
  * @swagger
- * /order/{id}:
+ * /orders/{id}:
  *   get:
  *     tags:
  *       - Orders
- *     description: Retrieves a specific order by ID.
- *     produces:
- *       - application/json
+ *     summary: Retrieve a specific order by its ID
  *     parameters:
  *       - name: id
- *         description: Order's ID.
+ *         description: Order's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: An order object.
- *         schema:
- *           $ref: '#/definitions/Order'
+ *         description: Details of the specified order.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Order'
  *       404:
  *         description: Order not found.
  *       500:
  *         description: Error retrieving order.
  */
+
 /**
  * @swagger
- * /order:
+ * /orders:
  *   post:
  *     tags:
  *       - Orders
- *     description: Creates a new order.
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: order
- *         description: Order object.
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Order'
+ *     summary: Create a new order
+ *     description: Adds a new order to the order book.
+ *     requestBody:
+ *       description: Order object that needs to be added.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Order'
  *     responses:
  *       201:
- *         description: Successfully created order.
+ *         description: Order successfully created.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Order'
  *       500:
  *         description: Error creating order.
  */
+
 /**
  * @swagger
- * /order/{id}:
+ * /orders/{id}:
  *   put:
  *     tags:
  *       - Orders
- *     description: Updates a specific order by ID.
- *     produces:
- *       - application/json
+ *     summary: Update an existing order by its ID
  *     parameters:
  *       - name: id
- *         description: Order's ID.
+ *         description: Order's unique identifier.
  *         in: path
  *         required: true
- *         type: string
- *       - name: order
- *         description: Order object with updated values.
- *         in: body
- *         required: true
  *         schema:
- *           $ref: '#/definitions/Order'
+ *           type: integer
+ *     requestBody:
+ *       description: Updated order object.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Order'
  *     responses:
  *       200:
- *         description: Successfully updated order.
+ *         description: Order successfully updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Order'
  *       404:
  *         description: Order not found.
  *       500:
@@ -101,22 +129,21 @@ const OrdersController = require('../controllers/order.controller');
 
 /**
  * @swagger
- * /order/{id}:
+ * /orders/{id}:
  *   delete:
  *     tags:
  *       - Orders
- *     description: Deletes a specific order by ID.
- *     produces:
- *       - application/json
+ *     summary: Delete an order by its ID
  *     parameters:
  *       - name: id
- *         description: Order's ID.
+ *         description: Order's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
- *         description: Successfully deleted order.
+ *         description: Order successfully deleted.
  *       404:
  *         description: Order not found.
  *       500:

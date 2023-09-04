@@ -6,57 +6,22 @@ const TradesController = require('../controllers/trade.controller');
  * @swagger
  * /trades:
  *   get:
- *     summary: Retrieve a list of trades
+ *     tags:
+ *       - Trades
+ *     summary: Retrieve all executed trades
+ *     description: Fetches all trades executed on the platform.
  *     responses:
  *       200:
- *         description: A list of trades.
+ *         description: List of all trades.
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Trade'
- * 
- * components:
- *   schemas:
- *     Trade:
- *       type: object
- *       properties:
- *         id:
- *           type: integer
- *         maker:
- *           type: integer
- *         taker:
- *           type: integer
- *         pair:
- *           type: string
- *         amount:
- *           type: number
- *         price:
- *           type: number
- *         date:
- *           type: string
- */
-/**
- * @swagger
- * /trades:
- *   get:
- *     tags:
- *       - Trades
- *     description: Retrieves all trades.
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: An array of trade objects.
- *         schema:
- *           type: array
- *           items:
- *             $ref: '#/definitions/Trade'
  *       500:
  *         description: Error retrieving trades.
  */
-
 
 /**
  * @swagger
@@ -64,26 +29,26 @@ const TradesController = require('../controllers/trade.controller');
  *   get:
  *     tags:
  *       - Trades
- *     description: Retrieves a specific trade by ID.
- *     produces:
- *       - application/json
+ *     summary: Retrieve details of a specific trade using its ID
  *     parameters:
  *       - name: id
- *         description: Trade's ID.
+ *         description: Trade's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       200:
- *         description: A trade object.
- *         schema:
- *           $ref: '#/definitions/Trade'
+ *         description: Details of the specified trade.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trade'
  *       404:
  *         description: Trade not found.
  *       500:
  *         description: Error retrieving trade.
  */
-
 
 /**
  * @swagger
@@ -91,23 +56,25 @@ const TradesController = require('../controllers/trade.controller');
  *   post:
  *     tags:
  *       - Trades
- *     description: Creates a new trade.
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: trade
- *         description: Trade object.
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Trade'
+ *     summary: Register a new trade execution
+ *     description: Adds a new trade to the list of executed trades.
+ *     requestBody:
+ *       description: Trade object that needs to be added.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Trade'
  *     responses:
  *       201:
- *         description: Successfully created trade.
+ *         description: Trade successfully registered.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trade'
  *       500:
- *         description: Error creating trade.
+ *         description: Error registering the trade.
  */
-
 
 /**
  * @swagger
@@ -115,30 +82,33 @@ const TradesController = require('../controllers/trade.controller');
  *   put:
  *     tags:
  *       - Trades
- *     description: Updates a specific trade by ID.
- *     produces:
- *       - application/json
+ *     summary: Update details of a specific trade using its ID
  *     parameters:
  *       - name: id
- *         description: Trade's ID.
+ *         description: Trade's unique identifier.
  *         in: path
  *         required: true
- *         type: string
- *       - name: trade
- *         description: Trade object with updated values.
- *         in: body
- *         required: true
  *         schema:
- *           $ref: '#/definitions/Trade'
+ *           type: integer
+ *     requestBody:
+ *       description: Updated trade object.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Trade'
  *     responses:
  *       200:
- *         description: Successfully updated trade.
+ *         description: Trade successfully updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Trade'
  *       404:
  *         description: Trade not found.
  *       500:
- *         description: Error updating trade.
+ *         description: Error updating the trade.
  */
-
 
 /**
  * @swagger
@@ -146,23 +116,23 @@ const TradesController = require('../controllers/trade.controller');
  *   delete:
  *     tags:
  *       - Trades
- *     description: Deletes a specific trade by ID.
- *     produces:
- *       - application/json
+ *     summary: Remove a specific trade using its ID
  *     parameters:
  *       - name: id
- *         description: Trade's ID.
+ *         description: Trade's unique identifier.
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *           type: integer
  *     responses:
  *       204:
- *         description: Successfully deleted trade.
+ *         description: Trade successfully deleted.
  *       404:
  *         description: Trade not found.
  *       500:
- *         description: Error deleting trade.
+ *         description: Error deleting the trade.
  */
+
 
 
 

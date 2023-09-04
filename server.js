@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
 const {sequelize } = require('./config/db.config');
+require('./models/index.js'); 
 const userRoutes= require('./routes/user.route');
 const orderRoutes = require('./routes/order.route');
 const tradeRoutes = require('./routes/trade.route');
@@ -11,6 +12,7 @@ const tokenRoutes = require('./routes/token.route');
 const walletRoutes = require('./routes/wallet.route');
 const swaggerSpec = require('./swagger');
 const tradingPairRoutes = require('./routes/tradingpair.route');
+
 
 
 const app = express();
@@ -58,8 +60,8 @@ app.listen(PORT, () => {
       console.log('Connection has been established successfully.');
   
       // // Synchronize the models with the database
-      // await sequelize.sync({alter:true});
-      // console.log('Models synchronized successfully.');
+      await sequelize.sync({alter:true});
+      console.log('Models synchronized successfully.');
     } catch (error) {
       console.error('Unable to connect to the database:', error)
     }

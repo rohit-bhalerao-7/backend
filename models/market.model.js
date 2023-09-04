@@ -13,4 +13,6 @@ const Market = sequelize.define('Market', {
     modelName: 'market'
 });
 
-module.exports = Market;
+module.exports = {
+    Market
+}
