@@ -11,7 +11,6 @@ const TradingPair = sequelize.define('TradingPair', {
     },
     
     
-    
     lastMarketPrice: DataTypes.FLOAT,
     change24h: DataTypes.FLOAT,
     volume: DataTypes.FLOAT,

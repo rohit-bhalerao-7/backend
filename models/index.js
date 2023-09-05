@@ -22,7 +22,6 @@ Order.belongsTo(Token, { foreignKey: 'token_id' });
 Order.belongsToMany(Order, { through: Trade, as: 'BuyOrders', foreignKey: 'buy_order_id' });
 Order.belongsToMany(Order, { through: Trade, as: 'SellOrders', foreignKey: 'sell_order_id' });
 
-//TradingPair.belongsTo(Market, { foreignKey: 'marketType', targetKey: 'type' });
 Market.hasMany(TradingPair, { foreignKey: 'marketType', sourceKey: 'type' });
 
 module.exports = {
