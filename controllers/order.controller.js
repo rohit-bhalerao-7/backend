@@ -43,16 +43,17 @@ const OrdersController = {
 
     createOrder: async (req, res) => {
         try {
-            const order = await Order.create(req.body)
-            // Add  order
-            if(req.body.order_type==='sell')
-                await redis.zadd('sellOrders', order.dataValues.price, order.dataValues.order_id);
-            else 
-                await redis.zadd('buyOrders', order.dataValues.price, order.dataValues.order_id);
+            const order = await Order.create(req.body);
+            // Add order to Redis
+            if (req.body.order_type === 'sell')
+                await redis.zadd('sellOrders', order.dataValues.price, `${order.dataValues.order_id}:${order.dataValues.trading_pair}`);
+            else
+                await redis.zadd('buyOrders', order.dataValues.price, `${order.dataValues.order_id}:${order.dataValues.trading_pair}`);
             res.status(201).json(order);
         } catch (error) {
             res.status(500).json({ message: 'Error creating order', error });
         }
+        matchOrder(order);
     },
 
     updateOrderById: async (req, res) => {

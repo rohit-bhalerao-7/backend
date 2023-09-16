@@ -89,4 +89,5 @@ async function matchOrder(order) {
     if (order.amount > 0) {
         await addToOrderBook(order);
     }
+    await db.MatchedOrder.create({ ...buyOrder.dataValues, ...sellOrder.dataValues });
 }

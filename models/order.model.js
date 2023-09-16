@@ -10,6 +10,7 @@ const {DataTypes} = require('sequelize')
       order_type: DataTypes.ENUM('buy', 'sell'),
       amount: DataTypes.DOUBLE,
       price: DataTypes.DOUBLE,
+      trading_pair: DataTypes.STRING, 
       status: DataTypes.ENUM('open', 'partially_filled', 'filled', 'cancelled'),
       timestamp: {
         type: DataTypes.DATE,
