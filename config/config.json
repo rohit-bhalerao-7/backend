@@ -1,7 +1,7 @@
 {
     "development": {
-      "username": "postgres",
-      "password": "Rohitps123",
+      "username": "DB_CORE_USER",
+      "password": "DB_CORE_PASSWORD",
       "database": "ManthanDEX",
       "host": "172.31.64.1",
       "dialect": "postgresql"

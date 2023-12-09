@@ -5,8 +5,8 @@ const sequelize = new Sequelize({
     dialect: 'postgres', // The dialect for PostgreSQL
     host: '172.31.64.1', // Your PostgreSQL database host
     port: 5432, // Default PostgreSQL port
-    username: 'postgres', // Your database username
-    password: 'Rohitps123', // Your database password
+    username: 'DB_CORE_USER', // Your database username
+    password: 'DB_CORE_PASSWORD', // Your database password
     database: 'ManthanDEX', // Your database name
   });
   
